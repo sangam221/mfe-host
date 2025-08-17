@@ -13,9 +13,6 @@ module.exports = merge(common, {
     publicPath: "/",
   },
   plugins: [
-    new Dotenv({
-      path: './.env.production', // Path to your .env file
-    }),
     new ModuleFederationPlugin({
       name: "host",
       remotes: {

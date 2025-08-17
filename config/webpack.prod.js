@@ -4,6 +4,7 @@ const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPl
 const Dotenv = require('dotenv-webpack');
 const packageJson = require("../package.json");
 const path = require("path");
+const webpack = require("webpack");
 
 module.exports = merge(common, {
   mode: "production",
@@ -13,6 +14,10 @@ module.exports = merge(common, {
     publicPath: "/",
   },
   plugins: [
+    new webpack.DefinePlugin({
+        'process.env.PROD_REMOTE1_URL': JSON.stringify(process.env.PROD_REMOTE1_URL),
+        'process.env.PROD_REMOTE2_URL': JSON.stringify(process.env.PROD_REMOTE2_URL),    
+    }),
     new ModuleFederationPlugin({
       name: "host",
       remotes: {

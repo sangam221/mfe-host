@@ -3,14 +3,12 @@ FROM node:18-alpine as builder
 ARG PROD_REMOTE1_URL
 ARG PROD_REMOTE2_URL
 
-ENV PROD_REMOTE1_URL=${PROD_REMOTE1_URL}
-ENV PROD_REMOTE2_URL=${PROD_REMOTE2_URL}
-
 WORKDIR /app
 COPY package.json .
 RUN npm install
 COPY . .
-RUN npm run build
+
+RUN PROD_REMOTE1_URL=${PROD_REMOTE1_URL} PROD_REMOTE2_URL=${PROD_REMOTE2_URL} npm run build
 
 FROM nginx:stable-alpine
 COPY --from=builder /app/dist /usr/share/nginx/html

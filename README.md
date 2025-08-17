@@ -1,0 +1,2 @@
+# mfe-host
+host application

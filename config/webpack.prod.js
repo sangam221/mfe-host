@@ -21,8 +21,8 @@ module.exports = merge(common, {
     new ModuleFederationPlugin({
       name: "host",
       remotes: {
-        aimhub: "aimhub@${process.env.PROD_REMOTE1_URL}/aimhub/remoteEntry.js",
-        ft: "ft@${process.env.PROD_REMOTE2_URL}/ft/remoteEntry.js",
+        aimhub: "aimhub@http://13.49.23.114/aimhub/remoteEntry.js",
+        ft: "ft@http://13.49.23.114/ft/remoteEntry.js",
       },
       shared: packageJson.dependencies,
     }),

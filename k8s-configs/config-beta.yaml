@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mfe-host-config-beta
+  namespace: beta
+data:
+  REACT_APP_ENVIRONMENT_NAME: "Beta Environment"
+  REACT_APP_API_GATEWAY_URL: "https://api.beta.ebiz.verizon.com"

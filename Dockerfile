@@ -1,17 +1,18 @@
-FROM node:18-alpine as builder
-
-ARG PROD_REMOTE1_URL
-ARG PROD_REMOTE2_URL
+FROM node:18-alpine AS builder
 
 WORKDIR /app
-COPY package.json .
+COPY package.json ./
+COPY package-lock.json ./
 RUN npm install
 COPY . .
 
-RUN PROD_REMOTE1_URL=${PROD_REMOTE1_URL} PROD_REMOTE2_URL=${PROD_REMOTE2_URL} npm run build
+RUN npm run build
 
 FROM nginx:stable-alpine
 COPY --from=builder /app/dist /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]

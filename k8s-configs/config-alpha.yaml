@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mfe-host-config-alpha
+  namespace: alpha
+data:
+  REACT_APP_ENVIRONMENT_NAME: "Alpha Environment"
+  REACT_APP_API_GATEWAY_URL: "https://api.alpha.ebiz.verizon.com"
